@@ -29,7 +29,7 @@ The SIEM is the security operations centre's primary tool. When an alert fires, 
 
 ## Architecture
 
-This deployment connects **two separately-built Azure VMs** — a Windows Server VM from an earlier lab, and a new Ubuntu VM running Splunk — using **VNet peering**, rather than deploying both fresh in one network. This reflects a realistic scenario: in a real organisation, workloads are rarely built in a single flat network from day one; connecting existing, isolated VNets is a routine networking task.
+This deployment connects **two separately-built Azure VMs** — a Windows Server VM from an earlier lab, and a new Ubuntu VM running Splunk — using **VNet peering**. 
 
 ```
 ┌─────────────────────────────┐         ┌──────────────────────────────┐
@@ -138,7 +138,7 @@ While running the failed-login search (`EventCode=4625 | stats count by Account_
 
 **Remediation:** the NSG rule was updated to restrict RDP access to a single trusted IP address, closing the exposure.
 
-This turned a routine lab exercise into a live demonstration of the lab's core lesson: **exposed remote-access ports get attacked continuously and immediately**, and log-based detection is how you find out it's happening.
+This was a live demonstration of a core lesson: **exposed remote-access ports get attacked continuously and immediately**, and log-based detection is how you find out it's happening.
 
 ---
 
