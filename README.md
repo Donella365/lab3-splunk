@@ -1,4 +1,4 @@
-# Lab 3 — Splunk SIEM & Log Analysis
+# 03 Splunk SIEM & Log Analysis
 
 **Splunk Enterprise · Azure VMs · VNet Peering · SOC Detection Skills**
 
