@@ -4,11 +4,11 @@
 
 ---
 
-## The Business Problem This Lab Solves
+## What This Lab Covers
 
-A medium-sized organisation generates millions of log events every day — Windows Event Logs from workstations, authentication logs from Active Directory, firewall logs from network equipment, cloud resource logs. Without a SIEM, those logs sit in separate systems and nobody can search across them, correlate events, or identify patterns that indicate an attack.
+Splunk Enterprise is a platform for collecting, indexing, and searching machine data — logs from servers, network devices, applications, and security tools — enabling correlation and analysis across large volumes of log data.
 
-The SIEM is the security operations centre's primary tool. When an alert fires, the SOC analyst opens the SIEM and searches the logs to understand what happened, when, from where, and what was affected.
+In this lab, I deployed a Splunk Enterprise instance on an Ubuntu 22.04 virtual machine in Microsoft Azure, peered via VNet Peering with an existing Windows Server VM. From there, I configured log ingestion, built searches to correlate events across log sources, and created alerts to detect specific activity patterns.
 
 ---
 
