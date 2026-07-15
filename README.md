@@ -10,7 +10,7 @@
 
 Splunk Enterprise is a platform for collecting, indexing, and searching machine data, including logs from servers, network devices, applications, and security tools, enabling correlation and analysis across large volumes of log data.
 
-In this lab, I deployed a Splunk Enterprise instance on an Ubuntu 22.04 virtual machine in Microsoft Azure, peered via VNet Peering with an existing Windows Server VM. From there, I configured log ingestion, built searches to correlate events, and created alerts to detect specific activity patterns.
+In this lab, I deployed a Splunk Enterprise instance on an Ubuntu 22.04 virtual machine in Microsoft Azure, peered via VNet Peering with an existing Windows Server VM. From there, I configured log ingestion, built searches to correlate events, and created an alert to detect specific activity patterns.
 
 ---
 
