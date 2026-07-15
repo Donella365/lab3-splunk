@@ -4,6 +4,8 @@
 
 ---
 
+## [▶️ Lab Walkthrough Video](https://www.loom.com)
+
 ## What This Lab Covers
 
 Splunk Enterprise is a platform for collecting, indexing, and searching machine data, including logs from servers, network devices, applications, and security tools, enabling correlation and analysis across large volumes of log data.
