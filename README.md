@@ -87,43 +87,26 @@ Both VMs' Network Security Groups restrict access by source IP or VNet range —
 **7. Installing Splunk and setting admin credentials**
 ![Splunk installed and configured](screenshots/07-splunk-installed-and-configured.png)
 
-**8. Roadblock — forwarder config still pointed at a previous (deleted) Splunk VM's IP**
-![Forwarder config roadblock](screenshots/08-forwarder-config-roadblock.png)
-
-**9. Fix — updated forwarder config to the current Splunk VM's private IP**
+**8. Updated forwarder configuration to point at the current Splunk VM's private IP**
 ![Forwarder config fixed](screenshots/09-forwarder-config-fixed.png)
 
-**10. Universal Forwarder service running after the fix**
+**9. Universal Forwarder service running after the fix**
 ![Forwarder service running](screenshots/10-forwarder-service-running.png)
 
-**11. Verification — logs flowing into Splunk end-to-end (peering → forwarder → indexing)**
+**10. Verification — logs flowing into Splunk end-to-end (peering → forwarder → indexing)**
 ![Data flowing confirmed](screenshots/11-data-flowing-confirmed.png)
 
-**12. Real-world finding — Splunk detecting live internet brute-force traffic**
+**11. Real-world finding — Splunk detecting live internet brute-force traffic**
 ![Brute force detection](screenshots/12-brute-force-detection.png)
 
-**13. Windows Security Overview dashboard — Failed Logins & Account Lockouts panels**
+**12. Windows Security Overview dashboard — Failed Logins & Account Lockouts panels**
 ![Security dashboard top panels](screenshots/13-security-dashboard-top.png)
 
-**14. Windows Security Overview dashboard — Login Activity Over Time & Top Source IPs panels**
+**13. Windows Security Overview dashboard — Login Activity Over Time & Top Source IPs panels**
 ![Security dashboard bottom panels](screenshots/14-security-dashboard-bottom.png)
 
-**15. Automated brute-force alert — configured and saved**
+**14. Automated brute-force alert — configured and saved**
 ![Alert configuration saved](screenshots/15-alert-config-saved.png)
-
----
-
-## A Real Finding, Not a Simulated One
-
-While running the failed-login search (`EventCode=4625 | stats count by Account_Name, Workstation_Name`), the results showed **4,500+ failed login events in 24 hours** — far beyond anything generated for testing. The account names were Spanish-language generic terms (Director, Gerencia, Gerente, Logistica, Coordinador) and the workstation names were randomly-generated strings (`WIN-5Q9IKHKR5EA`, `B_309`, `H64-162-177-27`) — classic signatures of automated internet bot scanning, not lab test data.
-
-**Root cause:** the Windows Server VM's RDP port (3389) was open to any source IP (`*`), left over from an earlier setup step. The moment that port was reachable from the internet, automated scanners found it and began attempting logins — exactly the kind of activity a SIEM exists to catch.
-
-**Verification:** cross-referencing successful logon events (`EventCode=4624`, `Logon_Type=10`) confirmed only 2 legitimate RDP sessions — no unauthorized access occurred. Account lockout events (`EventCode=4740`) came back at zero, indicating the attack was broad and shallow (many different usernames tried a few times each) rather than a focused attempt against one real account.
-
-**Remediation:** the NSG rule was updated to restrict RDP access to a single trusted IP address, closing the exposure.
-
-This was a live demonstration of a core lesson: **exposed remote-access ports get attacked continuously and immediately**, and log-based detection is how you find out it's happening.
 
 ---
 
@@ -145,7 +128,3 @@ This was a live demonstration of a core lesson: **exposed remote-access ports ge
 
 ---
 
-## What I'd Do Differently
-
-- **Plan non-overlapping VNet CIDRs from the start.** An earlier manual attempt at this lab used the same address space (`172.16.0.0/16`) for both VNets in different regions, which blocked peering entirely once both VMs were built. Planning distinct CIDR blocks up front avoids a rebuild later.
-- **Review NSG rules immediately after any lab that opens remote access.** The exposed RDP rule that led to the brute-force finding wasn't a fresh mistake — it was an old rule from an earlier session that never got locked back down. A quick NSG audit at the start of each new lab session would have caught this sooner.
