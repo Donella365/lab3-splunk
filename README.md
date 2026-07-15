@@ -96,7 +96,7 @@ Both VMs' Network Security Groups restrict access by source IP or VNet range —
 **10. Verification — logs flowing into Splunk end-to-end (peering → forwarder → indexing)**
 ![Data flowing confirmed](screenshots/11-data-flowing-confirmed.png)
 
-**11. Real-world finding — Splunk detecting live internet brute-force traffic**
+**11. EventCode=4625 search identifying brute-force login attempts against the Windows VM**
 ![Brute force detection](screenshots/12-brute-force-detection.png)
 
 **12. Windows Security Overview dashboard — Failed Logins & Account Lockouts panels**
