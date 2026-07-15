@@ -46,7 +46,15 @@ Both VMs' Network Security Groups restrict access by source IP or VNet range —
 
 **SPL (Splunk Processing Language):** the pipeline-based query language used to search Splunk. Example: `index=windows_logs EventCode=4625 | stats count by Account_Name | sort -count` finds failed logins, counts them by username, sorts highest to lowest.
 
+**Splunk Index:** a named storage bucket for incoming log data, similar to a database table. This lab uses one index called `windows_logs`.
+
+**Universal Forwarder:** a lightweight agent installed on a source machine to collect and send its logs to Splunk. Installed here on the Windows Server VM to forward Security, System, and Application events over port 9997.
+
+**inputs.conf:** the configuration file that tells the Universal Forwarder which logs to collect. Each bracketed section defines one log source, e.g. `[WinEventLog://Security]`.
+
 **VNet Peering:** a private connection between two otherwise-isolated Azure Virtual Networks, letting VMs in each reach the other's private IPs directly without routing through the public internet. Used here to connect the pre-existing Windows Server VM's network to a newly-built Splunk network.
+
+**Windows Event IDs:** unique numbers Windows assigns to specific types of logged activity, letting you search and filter for exact event types.
 
 **Windows Event IDs used throughout this lab:**
 - **4624** — successful logon
