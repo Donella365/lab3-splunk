@@ -4,7 +4,7 @@
 
 ---
 
-## [▶️ Lab Walkthrough Video](https://www.loom.com)
+## [▶️ Lab Walkthrough Video](https://www.loom.com/share/ed7c66be5d284ef1873a84b0c5b4e182)
 
 ## What This Lab Covers
 
