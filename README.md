@@ -90,7 +90,7 @@ Both VMs' Network Security Groups restrict access by source IP or VNet range —
 **8. Updated forwarder configuration to point at the current Splunk VM's private IP**
 ![Forwarder config fixed](screenshots/09-forwarder-config-fixed.png)
 
-**9. Universal Forwarder service running after the fix**
+**9. Universal Forwarder service running**
 ![Forwarder service running](screenshots/10-forwarder-service-running.png)
 
 **10. Verification — logs flowing into Splunk end-to-end (peering → forwarder → indexing)**
