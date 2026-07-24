@@ -18,23 +18,8 @@ In this lab, I deployed a Splunk Enterprise instance on an Ubuntu 22.04 virtual 
 
 This deployment connects **two separately-built Azure VMs** — a Windows Server VM from an earlier lab, and a new Ubuntu VM running Splunk — using **VNet peering**. 
 
-```
-┌─────────────────────────────┐         ┌──────────────────────────────┐
-│  vnet-centralindia-1         │         │  vnet-splunk-lab3             │
-│  (10.0.0.0/16)                │◄──────►│  (10.1.0.0/16)                │
-│                               │ Peered │                                │
-│  ┌─────────────────────────┐ │         │  ┌──────────────────────────┐ │
-│  │ vm-actived               │ │         │  │ splunk-vm                 │ │
-│  │ Windows Server           │ │         │  │ Ubuntu 22.04               │ │
-│  │ Universal Forwarder      │─┼─────────┼─►│ Splunk Enterprise 10.4.1   │ │
-│  │ generates Security /     │ │ :9997  │  │ receives + indexes logs    │ │
-│  │ System / Application logs│ │         │  │ web UI on :8000            │ │
-│  └─────────────────────────┘ │         │  └──────────────────────────┘ │
-└─────────────────────────────┘         └──────────────────────────────┘
-        NSG: RDP (3389)                          NSG: SSH (22), Web UI (8000)
-                                                   — locked to admin's IP
-                                                  Forwarder (9997) — VNet-only
-```
+<img width="1624" height="969" alt="lab3diagram" src="https://github.com/user-attachments/assets/0bcf9937-f816-48c6-a472-bd2d6a8c3570" />
+
 
 Both VMs' Network Security Groups restrict access by source IP or VNet range — SSH and the Splunk web UI are reachable only from the admin's own IP; the forwarder port (9997) accepts traffic only from the two peered VNet ranges, never the public internet.
 
